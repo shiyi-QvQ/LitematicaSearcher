@@ -29,7 +29,7 @@ final class RedenImageCache {
 			.followRedirects(HttpClient.Redirect.NORMAL)
 			.build();
 	private static final Map<String, CompletableFuture<Identifier>> TEXTURES = new ConcurrentHashMap<>();
-	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 LitematicaSearcher/1.0.0";
+	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
 
 	private RedenImageCache() {
 	}
@@ -62,6 +62,7 @@ final class RedenImageCache {
 				.timeout(Duration.ofSeconds(20))
 				.header("User-Agent", USER_AGENT)
 				.header("Accept", "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8")
+				.header("Referer", "https://redenmc.com/")
 				.GET()
 				.build();
 
