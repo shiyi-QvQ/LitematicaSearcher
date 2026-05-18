@@ -3,5 +3,22 @@
 	"key.category.litematicasearcher.main": "Litematica Searcher",
 	"key.litematicasearcher.open_search": "Open RedenMC Search",
 	"litematicasearcher.gui.button.reden_search": "RedenMC Website Search",
-	"litematicasearcher.screen.search.title": "RedenMC Search"
+	"litematicasearcher.screen.search.author": "Author: %s",
+	"litematicasearcher.screen.search.confirm": "Search",
+	"litematicasearcher.screen.search.input": "Search query",
+	"litematicasearcher.screen.search.placeholder": "Search RedenMC machines",
+	"litematicasearcher.screen.search.status.error": "Failed to load RedenMC search results.",
+	"litematicasearcher.screen.search.status.loading": "Loading RedenMC machines...",
+	"litematicasearcher.screen.search.status.no_results": "No machines found.",
+	"litematicasearcher.screen.search.title": "RedenMC Search",
+	"litematicasearcher.screen.details.author": "Author: %s",
+	"litematicasearcher.screen.details.description": "Description",
+	"litematicasearcher.screen.details.downloads": "Downloads: %s",
+	"litematicasearcher.screen.details.likes": "Likes: %s",
+	"litematicasearcher.screen.details.status.error": "Failed to load details.",
+	"litematicasearcher.screen.details.status.loading": "Loading details...",
+	"litematicasearcher.screen.details.status.not_found": "Machine details were not found.",
+	"litematicasearcher.screen.details.title": "RedenMC Details",
+	"litematicasearcher.screen.details.versions": "Versions: %s",
+	"litematicasearcher.version.1_21_x": "1.21.x"
 }

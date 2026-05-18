@@ -3,5 +3,22 @@
 	"key.category.litematicasearcher.main": "Litematica 搜索器",
 	"key.litematicasearcher.open_search": "打开 RedenMC 搜索",
 	"litematicasearcher.gui.button.reden_search": "RedenMC 网站搜索",
-	"litematicasearcher.screen.search.title": "RedenMC 搜索"
+	"litematicasearcher.screen.search.author": "作者: %s",
+	"litematicasearcher.screen.search.confirm": "搜索",
+	"litematicasearcher.screen.search.input": "搜索关键词",
+	"litematicasearcher.screen.search.placeholder": "搜索 RedenMC 机器",
+	"litematicasearcher.screen.search.status.error": "加载 RedenMC 搜索结果失败。",
+	"litematicasearcher.screen.search.status.loading": "正在加载 RedenMC 机器...",
+	"litematicasearcher.screen.search.status.no_results": "未找到机器。",
+	"litematicasearcher.screen.search.title": "RedenMC 搜索",
+	"litematicasearcher.screen.details.author": "作者: %s",
+	"litematicasearcher.screen.details.description": "简介",
+	"litematicasearcher.screen.details.downloads": "下载数: %s",
+	"litematicasearcher.screen.details.likes": "点赞数: %s",
+	"litematicasearcher.screen.details.status.error": "加载详情失败。",
+	"litematicasearcher.screen.details.status.loading": "正在加载详情...",
+	"litematicasearcher.screen.details.status.not_found": "未找到机器详情。",
+	"litematicasearcher.screen.details.title": "RedenMC 详情",
+	"litematicasearcher.screen.details.versions": "版本: %s",
+	"litematicasearcher.version.1_21_x": "1.21.x"
 }
