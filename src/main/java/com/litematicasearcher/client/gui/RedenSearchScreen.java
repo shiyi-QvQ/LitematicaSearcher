@@ -183,8 +183,8 @@ public final class RedenSearchScreen extends Screen {
 	}
 
 	private void renderChrome(GuiGraphics graphics) {
-		drawRoundedRect(graphics, PADDING - 4, PADDING, width - PADDING + 4, PADDING + NAV_HEIGHT, 6, PANEL_COLOR);
-		drawRoundedRect(graphics, listX(), listY(), listRight(), listBottom(), 6, PANEL_COLOR);
+		drawPanel(graphics, PADDING - 4, PADDING, width - PADDING + 4, PADDING + NAV_HEIGHT);
+		drawPanel(graphics, listX(), listY(), listRight(), listBottom());
 	}
 
 	private void renderResults(GuiGraphics graphics, int mouseX, int mouseY) {
@@ -219,11 +219,11 @@ public final class RedenSearchScreen extends Screen {
 
 	private void renderRow(GuiGraphics graphics, RedenMachine machine, int x, int y, int rowWidth, int mouseX, int mouseY) {
 		boolean hovered = mouseX >= x && mouseX <= x + rowWidth && mouseY >= y && mouseY <= y + ROW_HEIGHT;
-		drawRoundedRect(graphics, x, y, x + rowWidth, y + ROW_HEIGHT, 6, hovered ? PANEL_HOVER_COLOR : PANEL_COLOR);
+		drawPanel(graphics, x, y, x + rowWidth, y + ROW_HEIGHT, hovered ? PANEL_HOVER_FILL : PANEL_FILL);
 
 		int imageX = x + 10;
 		int imageY = y + 10;
-		drawRoundedRect(graphics, imageX, imageY, imageX + IMAGE_SIZE, imageY + IMAGE_SIZE, 5, 0x66000000);
+		drawPanel(graphics, imageX, imageY, imageX + IMAGE_SIZE, imageY + IMAGE_SIZE);
 		renderMachineImage(graphics, machine, imageX, imageY);
 
 		int statsWidth = 86;
@@ -257,7 +257,7 @@ public final class RedenSearchScreen extends Screen {
 	}
 
 	private void renderStatChip(GuiGraphics graphics, int x, int y, int width, String text) {
-		drawRoundedRect(graphics, x, y, x + width, y + 16, 4, CHIP_COLOR);
+		graphics.fill(x, y, x + width, y + 16, CHIP_COLOR);
 		graphics.drawString(font, font.plainSubstrByWidth(text, width - 8), x + 4, y + 4, TEXT_SECONDARY, true);
 	}
 
@@ -299,15 +299,24 @@ public final class RedenSearchScreen extends Screen {
 		return height - PADDING;
 	}
 
-	static void drawRoundedRect(GuiGraphics graphics, int left, int top, int right, int bottom, int radius, int color) {
-		int safeRadius = Math.max(0, radius);
-		graphics.fill(left + safeRadius, top, right - safeRadius, bottom, color);
-		graphics.fill(left, top + safeRadius, right, bottom - safeRadius, color);
+	static final int PANEL_FILL = 0xC0000000;
+	static final int PANEL_HOVER_FILL = 0xE0000000;
+	static final int PANEL_BORDER = 0xFF606060;
 
-		for (int offset = 0; offset < safeRadius; offset++) {
-			int inset = safeRadius - offset;
-			graphics.fill(left + inset, top + offset, right - inset, top + offset + 1, color);
-			graphics.fill(left + inset, bottom - offset - 1, right - inset, bottom - offset, color);
-		}
+	static void drawPanel(GuiGraphics graphics, int left, int top, int right, int bottom) {
+		drawPanel(graphics, left, top, right, bottom, PANEL_FILL);
+	}
+
+	static void drawPanel(GuiGraphics graphics, int left, int top, int right, int bottom, int fillColor) {
+		graphics.fill(left + 1, top + 1, right - 1, bottom - 1, fillColor);
+		graphics.fill(left, top, right, top + 1, PANEL_BORDER);
+		graphics.fill(left, bottom - 1, right, bottom, PANEL_BORDER);
+		graphics.fill(left, top, left + 1, bottom, PANEL_BORDER);
+		graphics.fill(right - 1, top, right, bottom, PANEL_BORDER);
+	}
+
+	@Deprecated
+	static void drawRoundedRect(GuiGraphics graphics, int left, int top, int right, int bottom, int radius, int color) {
+		drawPanel(graphics, left, top, right, bottom);
 	}
 }

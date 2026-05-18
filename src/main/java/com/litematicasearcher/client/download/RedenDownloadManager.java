@@ -66,6 +66,8 @@ public final class RedenDownloadManager {
 		HttpRequest request = HttpRequest.newBuilder(uri)
 				.timeout(Duration.ofSeconds(60))
 				.header("User-Agent", USER_AGENT)
+				.header("Accept", "*/*")
+				.header("Referer", "https://redenmc.com/")
 				.GET()
 				.build();
 
@@ -147,11 +149,26 @@ public final class RedenDownloadManager {
 			}
 
 			if (trimmed.startsWith("filename=")) {
-				return Optional.of(stripQuotes(trimmed.substring("filename=".length())));
+				String raw = stripQuotes(trimmed.substring("filename=".length()));
+				return Optional.of(recoverUtf8FileName(raw));
 			}
 		}
 
 		return Optional.empty();
+	}
+
+	private static String recoverUtf8FileName(String raw) {
+		try {
+			byte[] bytes = raw.getBytes(StandardCharsets.ISO_8859_1);
+			String recovered = new String(bytes, StandardCharsets.UTF_8);
+
+			if (!recovered.equals(raw) && recovered.length() > 0) {
+				return recovered;
+			}
+		} catch (Exception ignored) {
+		}
+
+		return raw;
 	}
 
 	private static String sanitizeFileName(String fileName) {
