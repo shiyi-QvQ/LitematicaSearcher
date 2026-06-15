@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "litematicasearcher",
+	"version": "${version}",
+	"name": "LitematicaSearcher",
+	"description": "Search and download RedenMC Litematica machines from inside Minecraft.",
+	"authors": [
+		"Albertchen",
+		"shiyi"
+	],
+	"contact": {
+		"homepage": "https://github.com/albertchen857/LitematicaSearcher"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/litematicasearcher/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"com.litematicasearcher.LitematicaSearcher"
+		],
+		"client": [
+			"com.litematicasearcher.client.LitematicaSearcherClient"
+		],
+		"modmenu": [
+			"com.litematicasearcher.integration.RedenModMenuIntegration"
+		],
+		"fabric-datagen": [
+			"com.litematicasearcher.LitematicaSearcherDataGenerator"
+		]
+	},
+	"mixins": [
+		"litematicasearcher.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"malilib": "*",
+		"litematica": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}

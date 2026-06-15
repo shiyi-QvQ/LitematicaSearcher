@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "com.litematicasearcher.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"LitematicaMainMenuMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
