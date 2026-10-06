@@ -5,10 +5,11 @@
 	"name": "LitematicaSearcher",
 	"description": "Search and download RedenMC Litematica machines from inside Minecraft.",
 	"authors": [
-		"Albertchen"
+		"Albertchen",
+		"shiyi"
 	],
 	"contact": {
-		"homepage": "https://redenmc.com/"
+		"homepage": "https://github.com/albertchen857/LitematicaSearcher"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/litematicasearcher/icon.png",

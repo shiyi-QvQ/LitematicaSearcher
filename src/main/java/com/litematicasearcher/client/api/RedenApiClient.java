@@ -15,11 +15,12 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public final class RedenApiClient {
-	public static final int DEFAULT_LIMIT = 24;
-	public static final int DEFAULT_OFFSET = 0;
+	public static final int DEFAULT_PAGE_SIZE = 10;
+	public static final int DEFAULT_PAGE = 1;
 
-	private static final String USER_AGENT = "LitematicaSearcher/1.0.0 Minecraft-Fabric";
+	private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36";
 	private static final String BASE_URL = "https://redenmc.com/api/mc-services";
+	private static final String API_REFERER = "https://redenmc.com/zh_cn/litematica";
 	private static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(20);
 
 	private final HttpClient httpClient;
@@ -36,22 +37,27 @@ public final class RedenApiClient {
 	}
 
 	public CompletableFuture<RedenSearchResponse> search(String query) {
-		return search(query, DEFAULT_LIMIT, DEFAULT_OFFSET);
+		return search(query, DEFAULT_PAGE, DEFAULT_PAGE_SIZE);
 	}
 
-	public CompletableFuture<RedenSearchResponse> search(String query, int limit, int offset) {
-		if (limit <= 0) {
-			throw new IllegalArgumentException("limit must be greater than 0");
+	public CompletableFuture<RedenSearchResponse> searchByPage(String query, int page, int pageSize) {
+		return search(query, page, pageSize);
+	}
+
+	public CompletableFuture<RedenSearchResponse> search(String query, int page, int pageSize) {
+		if (page < 1) {
+			page = 1;
 		}
 
-		if (offset < 0) {
-			throw new IllegalArgumentException("offset must not be negative");
+		if (pageSize <= 0) {
+			throw new IllegalArgumentException("pageSize must be greater than 0");
 		}
 
 		String normalizedQuery = query == null ? "" : query;
 		URI uri = URI.create(BASE_URL + "/litematica/search?q=" + encodeQuery(normalizedQuery)
-				+ "&limit=" + limit
-				+ "&offset=" + offset);
+				+ "&lang=zh_cn"
+				+ "&page=" + page
+				+ "&pageSize=" + pageSize);
 
 		return sendJsonRequest(uri).thenApply(RedenSearchResponse::fromJson);
 	}
@@ -75,6 +81,8 @@ public final class RedenApiClient {
 				.timeout(REQUEST_TIMEOUT)
 				.header("Accept", "application/json")
 				.header("User-Agent", USER_AGENT)
+				.header("Referer", API_REFERER)
+				.header("Accept-Language", "zh-CN,zh;q=0.9")
 				.GET()
 				.build();
 
